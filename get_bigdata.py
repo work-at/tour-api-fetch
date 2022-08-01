@@ -32,7 +32,7 @@ def main(startYmd, endYmd):
     pages = math.ceil(content['response']['body']['totalCount'] / 1000)
     with alive_bar(pages - 1, force_tty=True) as bar:
         for pageNum in range(2, pages + 1):
-            content = get_locgoRegnVisitrDDList('20210101', '20211231', pageNum)
+            content = get_locgoRegnVisitrDDList(startYmd, endYmd, pageNum)
             dataframe = jsonToDataframe(content['response']['body']['items']['item']).sort_values('baseYmd')
             append_dataframe_to_csv(filename, dataframe)
             bar()
